@@ -29,7 +29,7 @@ public class PluginReloader extends JavaPlugin {
 	Logger log = Logger.getLogger("Minecraft");
 	
 	public void onEnable(){ 
-		log.info("[PluginReloader] Version 0.42b enabled (by MadJawa)");
+		log.info("[PluginReloader] Version 0.1 enabled (by MadJawa)");
 	}
 	 
 	public void onDisable(){ 

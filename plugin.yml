@@ -1,6 +1,6 @@
 name: PluginReloader
 main: net.madjawa.pluginreloader.PluginReloader
-version: 0.42a
+version: 0.1
 commands:
   plugin:
     description: Load, unload or reload the specified plugins
