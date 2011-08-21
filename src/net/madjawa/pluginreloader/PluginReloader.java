@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.SortedSet;
 import java.util.logging.Logger;
 
+import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.PluginCommand;
@@ -42,19 +43,19 @@ public class PluginReloader extends JavaPlugin {
 			String action = args[0];
 			
 			if (!(action.equalsIgnoreCase("load") || action.equalsIgnoreCase("unload") || action.equalsIgnoreCase("reload"))) {
-				sender.sendMessage("Invalid action specified");
+				sender.sendMessage(ChatColor.GOLD + "Invalid action specified");
 				
 				return false;
 			}
 			
 			if (!sender.hasPermission("pluginreloader." + action)) {
-				sender.sendMessage("You do not have the permission to do this");
+				sender.sendMessage(ChatColor.RED + "You do not have the permission to do this");
 				
 				return true; // don't send the command usage
 			}
 			
 			if (args.length == 1) {
-				sender.sendMessage("You must specify at least one plugin");
+				sender.sendMessage(ChatColor.GOLD + "You must specify at least one plugin");
 				
 				return true;
 			}
@@ -67,22 +68,22 @@ public class PluginReloader extends JavaPlugin {
 					if (action.equalsIgnoreCase("unload")) {
 						unloadPlugin(plName);
 						
-						sender.sendMessage("Unloaded " + plName + " successfully!");
+						sender.sendMessage(ChatColor.GRAY + "Unloaded " + ChatColor.RED + plName + ChatColor.GRAY + " successfully!");
 					}
 					else if (action.equalsIgnoreCase("load")) {
 						loadPlugin(plName);
 						
-						sender.sendMessage("Loaded " + plName + " successfully!");
+						sender.sendMessage(ChatColor.GRAY + "Loaded " + ChatColor.GREEN + plName + ChatColor.GRAY + " successfully!");
 					}
 					else if (action.equalsIgnoreCase("reload")) {
 						unloadPlugin(plName);
 						loadPlugin(plName);
 						
-						sender.sendMessage("Reloaded " + plName + " successfully!");
+						sender.sendMessage(ChatColor.GRAY + "Reloaded " + ChatColor.GREEN + plName + ChatColor.GRAY + " successfully!");
 					}
 				} catch (Exception e) {
 					e.printStackTrace();
-					sender.sendMessage("Error with " + plName + ": " + getExceptionMessage(e) + " (check console for more details)");
+					sender.sendMessage(ChatColor.GRAY + "Error with " + ChatColor.RED + plName + ChatColor.GRAY + ": " + ChatColor.GOLD + getExceptionMessage(e) + ChatColor.GRAY + " (check console for more details)");
 				}
 			}
 			
