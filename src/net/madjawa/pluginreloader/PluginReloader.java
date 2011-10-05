@@ -2,6 +2,7 @@ package net.madjawa.pluginreloader;
 
 import java.io.File;
 import java.lang.reflect.Field;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -26,16 +27,20 @@ import org.bukkit.plugin.UnknownDependencyException;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class PluginReloader extends JavaPlugin {
-	Logger log = Logger.getLogger("Minecraft");
 	
+	static final Logger log = Logger.getLogger("Minecraft");
+	
+	@Override
 	public void onEnable(){ 
 		log.info("[PluginReloader] Version 0.1 enabled (by MadJawa)");
 	}
-	 
+	
+	@Override
 	public void onDisable(){ 
 		log.info("[PluginReloader] Plugin disabled");
 	}
 	
+	@Override
 	public boolean onCommand(CommandSender sender, Command cmd, String commandLabel, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("plugin")) {
 			if (args.length < 1) return false;
@@ -192,8 +197,14 @@ public class PluginReloader extends JavaPlugin {
 					}
 				}
 				
-				for (Permission permission : pl.getDescription().getPermissions()) {
-					manager.removePermission(permission);
+				try {
+					ArrayList<Permission> permissionlist = pl.getDescription().getPermissions();
+					Iterator p = permissionlist.iterator();
+					while (p.hasNext()) {
+						manager.removePermission(p.next().toString());
+					}
+				} catch (NoSuchMethodError e) {
+					log.info("[PluginReloader] " + pluginName + " has no permissions to unload.");
 				}
 				
 				// ta-da! we're done (hopefully)
@@ -214,8 +225,14 @@ public class PluginReloader extends JavaPlugin {
 		
 		manager.enablePlugin(plugin);
 		
-		for (Permission p : plugin.getDescription().getPermissions()) {
-			manager.addPermission(p);
+		try {
+			ArrayList<Permission> permissionlist = plugin.getDescription().getPermissions();
+			Iterator p = permissionlist.iterator();
+			while (p.hasNext()) {
+				manager.removePermission(p.next().toString());
+			}
+		} catch (NoSuchMethodError e) {
+			log.info("[PluginReloader] " + pluginName + " has no permissions to load.");
 		}
 	}
 }
