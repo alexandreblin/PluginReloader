@@ -2,7 +2,6 @@ package net.madjawa.pluginreloader;
 
 import java.io.File;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -199,7 +198,7 @@ public class PluginReloader extends JavaPlugin {
 				}
 				
 				try {
-					ArrayList<Permission> permissionlist = pl.getDescription().getPermissions();
+					List<Permission> permissionlist = pl.getDescription().getPermissions();
 					Iterator p = permissionlist.iterator();
 					while (p.hasNext()) {
 						manager.removePermission(p.next().toString());
@@ -227,7 +226,7 @@ public class PluginReloader extends JavaPlugin {
 		manager.enablePlugin(plugin);
 		
 		try {
-			ArrayList<Permission> permissionlist = plugin.getDescription().getPermissions();
+			List<Permission> permissionlist = plugin.getDescription().getPermissions();
 			Iterator p = permissionlist.iterator();
 			while (p.hasNext()) {
 				manager.removePermission(p.next().toString());
