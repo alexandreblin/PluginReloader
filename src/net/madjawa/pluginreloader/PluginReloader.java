@@ -72,6 +72,7 @@ public class PluginReloader extends JavaPlugin {
 				try {
 					if (action.equalsIgnoreCase("unload")) {
 						unloadPlugin(plName);
+						System.gc(); // removes the Windows file lock for the plugin
 						
 						sender.sendMessage(ChatColor.GRAY + "Unloaded " + ChatColor.RED + plName + ChatColor.GRAY + " successfully!");
 					}
