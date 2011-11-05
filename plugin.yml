@@ -1,0 +1,25 @@
+name: PluginReloader
+main: net.madjawa.pluginreloader.PluginReloader
+version: 0.1
+commands:
+  plugin:
+    description: Load, unload or reload the specified plugins
+    usage: |
+      /<command> ACTION PLUGIN1 [PLUGIN2 ...]
+      Available actions: load, unload, reload
+permissions:
+    pluginreloader.*:
+        description: Gives access to all /plugin actions
+        children:
+            pluginreloader.load: true
+            pluginreloader.unload: true
+            pluginreloader.reload: true
+    pluginreloader.load:
+        description: Allows you to use the /plugin load command
+        default: op
+    pluginreloader.unload:
+        description: Allows you to use the /plugin unload command
+        default: op
+    pluginreloader.reload:
+        description: Allows you to use the /plugin reload command
+        default: op
