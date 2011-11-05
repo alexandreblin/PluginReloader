@@ -204,7 +204,7 @@ public class PluginReloader extends JavaPlugin {
 						manager.removePermission(p.next().toString());
 					}
 				} catch (NoSuchMethodError e) {
-					log.info("[PluginReloader] " + pluginName + " has no permissions to unload.");
+					// Do nothing
 				}
 				
 				// ta-da! we're done (hopefully)
@@ -225,14 +225,14 @@ public class PluginReloader extends JavaPlugin {
 		
 		manager.enablePlugin(plugin);
 		
+		List<Permission> permissionlist = plugin.getDescription().getPermissions();
+		Iterator p = permissionlist.iterator();
 		try {
-			List<Permission> permissionlist = plugin.getDescription().getPermissions();
-			Iterator p = permissionlist.iterator();
 			while (p.hasNext()) {
-				manager.removePermission(p.next().toString());
+				manager.addPermission(p.next());
 			}
 		} catch (NoSuchMethodError e) {
-			log.info("[PluginReloader] " + pluginName + " has no permissions to load.");
+			// Do nothing
 		}
 	}
 }
