@@ -1,3 +1,6 @@
-/build/
-.classpath
-.project
+/.classpath
+/.project
+/.settings
+/bin
+/build
+/jar.jardesc
