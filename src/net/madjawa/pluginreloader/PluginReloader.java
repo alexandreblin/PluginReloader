@@ -199,7 +199,7 @@ public class PluginReloader extends JavaPlugin {
 				
 				try {
 					List<Permission> permissionlist = pl.getDescription().getPermissions();
-					Iterator p = permissionlist.iterator();
+					Iterator<Permission> p = permissionlist.iterator();
 					while (p.hasNext()) {
 						manager.removePermission(p.next().toString());
 					}
@@ -226,7 +226,7 @@ public class PluginReloader extends JavaPlugin {
 		manager.enablePlugin(plugin);
 		
 		List<Permission> permissionlist = plugin.getDescription().getPermissions();
-		Iterator p = permissionlist.iterator();
+		Iterator<Permission> p = permissionlist.iterator();
 		try {
 			while (p.hasNext()) {
 				manager.addPermission(p.next());
